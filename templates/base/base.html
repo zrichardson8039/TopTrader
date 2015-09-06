@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block titile %}{% endblock %}</title>
+    <meta name="keywords" content="stock market game, stock market simulator, stock market challenge, trade simulator, trading simulator" />
+    <meta name="description" content="A game that simulates stock market trading" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/main.css" />
+</head>
+<body>
+    <div class="wrap">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <footer>
+        {% block footer_content %}
+        {% endblock %}
+    </footer>
+</body>
+</html>

@@ -1,25 +1,45 @@
-* {
-	outline: 1px solid red !important;
+#competitor-portfolios {
+	margin-top: 3%;
 }
 
-* {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	box-sizing: border-box;
+#profile-picture {
+	float: left;
+	margin-left: 20%;
+	margin-right: 5%;
 }
 
-.title {
-	background-color: #33BEBE;
-}
-.app {
-	display: flex;
+.portfolio {
+	text-align: right;
 }
 
-.image {
-	max-width: 460px;
+#stock-chart {
+	margin-top: 10%;
+	margin-left: 12%
 }
 
-.description {
-	max-width: 705px;
+.trade-order {
+	margin-left: 35%;
+	margin-top: 2%;
+	text-align: right;
+}
+
+.trade-button {
+	-moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-top: 2%;
+	padding-bottom: 2%;
+	margin-top: 4%;
+	font-weight: bold;
+}
+
+#buy-button {
+	background-color: green;
+	margin-left: 53%;
+}
+
+#sell-button {
+	background-color: red;
 }

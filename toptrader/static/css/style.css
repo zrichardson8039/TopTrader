@@ -1,4 +1,27 @@
+.company-name {
+	margin-left: 35%;
+	margin-top: 10%;
+	font-weight: bold;
+	font-size: 5em;
+	color: white;
+}
 
+.company-description {
+	margin-left: 17%;
+	margin-top: 3%;
+	font-style: italic;
+	font-size: 1.5em;
+	color: white;
+}
+
+.facebook {
+	margin-left: 40%;
+	margin-top: 5%;
+}
+
+.linkedin {
+	margin-left: 40%;
+}
 
 #competitor-portfolios {
 	margin-top: 3%;

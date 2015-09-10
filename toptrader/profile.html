@@ -13,17 +13,90 @@
 <body>
     <div class="container">
         <div class="col-md-6">
-            <p>Record: 2-1-0</p>
+            <p id="record">Record: 2-1-0</p>
         </div>
-        <div class="col-md-1">
-            <img src="http://placehold.it/100x80"
+        <div class="col-md-2">
+            <img class="profile-picture" id="profile-page-picture" src="http://placehold.it/100x80" alt="profile picture">
         </div>
-        <div class="col-md-1">
-            <button type="button">+ New Game</button>
+        <div class="col-md-2">
+            <a href="gamepage.html"><button class="profile-button" id="new-game" type="button">+ New Game</button></a>
         </div>
-        <div class="col-md-1">
-            <button type="button">Sign Out</button>
+        <div class="col-md-2">
+            <a href="index.html"><button class="profile-button" id="sign-out" type="button">Sign Out</button></a>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <table id="opponents-table">
+                <tr class="header-row">
+                    <td width="30%">Name</td>
+                    <td width="10%">Opponent Returns</td>
+                    <td width="10%">Returns</td>
+                    <td width="10%">Buys</td>
+                    <td width="10%">Sells</td>
+                </tr>
+                <tr class="opponent-row">
+                    <td width="30%">Nate Richardson</td>
+                    <td width="10%">$ 12,354.35</0></td>
+                    <td width="10%">$  9,354.35</td>
+                    <td width="10%">45</td>
+                    <td width="10%">45</td>
+                </tr>
+                <tr class="opponent-row-even">
+                    <td width="30%">Nate Richardson</td>
+                    <td width="10%">$ 12,354.35</0></td>
+                    <td width="10%">$  9,354.35</td>
+                    <td width="10%">45</td>
+                    <td width="10%">45</td>
+                </tr>
+                <tr class="opponent-row">
+                    <td width="30%">Nate Richardson</td>
+                    <td width="10%">$ 12,354.35</0></td>
+                    <td width="10%">$  9,354.35</td>
+                    <td width="10%">45</td>
+                    <td width="10%">45</td>
+                </tr>
+                <tr class="opponent-row-even">
+                    <td width="30%">Nate Richardson</td>
+                    <td width="10%">$ 12,354.35</0></td>
+                    <td width="10%">$  9,354.35</td>
+                    <td width="10%">45</td>
+                    <td width="10%">45</td>
+                </tr>
+                <tr class="opponent-row">
+                    <td width="30%">Nate Richardson</td>
+                    <td width="10%">$ 12,354.35</0></td>
+                    <td width="10%">$  9,354.35</td>
+                    <td width="10%">45</td>
+                    <td width="10%">45</td>
+                </tr>
+                <tr class="opponent-row-even">
+                    <td width="30%">Nate Richardson</td>
+                    <td width="10%">$ 12,354.35</0></td>
+                    <td width="10%">$  9,354.35</td>
+                    <td width="10%">45</td>
+                    <td width="10%">45</td>
+                </tr>
+                <tr class="total-row">
+                    <td width="30%">Total</td>
+                    <td width="10%">$ 74,126.10</0></td>
+                    <td width="10%">$ 56,126.10</td>
+                    <td width="10%">270</td>
+                    <td width="10%">270</td>
+                </tr>
+            </table>
+            <div class="col-md-6">
+                <img class="analytics-graph" id="trade-frequency-gaph" src="http://placehold.it/450x311" alt="Trade Type">
+            </div>
+            <div class="col-md-6">
+                <img class="analytics-graph" id="cumulative-returns" src="http://placehold.it/450x311" alt="Trade Type">
+            </div>
         </div>
     </div>
+    <footer>
+        <a class="footer-link" href="#">Privacy</a>
+        <a class="footer-link" href="#">Copywrite</a>
+        <a class="footer-link" href="#">About</a>
+        <a class="footer-link" href="#">Learn</a>
+    </footer>
 </body>
 </html>

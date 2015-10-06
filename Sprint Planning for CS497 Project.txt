@@ -15,10 +15,10 @@ Currently Completed
 Oct 08, what new functionality or technical hurdle will you have complete? 
 	- Have the front end mockups completed, although they will not contain JS or backend interaction.
 Oct 22, what new functionality or technical hurdle will you have complete?
-	- Have the site deployed on a live server (probably Linode, but maybe Rackspace). 
 	- Implement Email Authentication
 Nov 12, what new functionality or technical hurdle will you have complete?
 	- Wire up the front end with JavaScript to interact with the backend via the REST framework.
 	- All frontend functionality will be complete except for the visualizations.
 Dec 03, what new functionality or technical hurdle will you have complete? 
 	- Implement the visualizations (“real-time” graphs and user performance analytics charts) using D3.js and/or HTML5 Canvas.
+	- Have the site deployed on a live server.

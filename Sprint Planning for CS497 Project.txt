@@ -1,15 +1,22 @@
-Sprint Planning for CS497 Project
+﻿<img class="img-responsive profile-picture" src="http://placehold.it/100x80" alt="profile picture">margin-left: -10%%;#cumulative-returns {
+	margin-left: 0%;
+}margin-left: -3%;<img class="img-responsive profile-picture" src="http://placehold.it/100x80" alt="profile picture">margin-left: -10%%;#cumulative-returns {
+	margin-left: 0%;
+}margin-left: -3%;<img class="img-responsive profile-picture" src="http://placehold.it/100x80" alt="profile picture">margin-left: -10%%;#cumulative-returns {
+}margin-left: -3%;<img class="img-responsive profile-picture" src="http://placehold.it/100x80" alt="profile picture">margin-left: -10%%;#cumulative-returns {
+	margin-left: 0%;
+}margin-left: -3%;<img class="img-responsive profile-picture" src="http://placehold.it/100x80" alt="profile picture">Sprint Planning for CS497 Project
+	margin-left: 0%;
 
 Currently Completed
 	- Django Models built out for PostgreSQL Database
 	- Python Management Command in Django that scrapes all necessary data
 	- Django Rest Framework to interact with the database via GET, POST, PUT, DELETE
 Oct 08, what new functionality or technical hurdle will you have complete? 
-	- Have the site deployed on a live server (probably Linode, but maybe Rackspace).
 	- Have the front end mockups completed, although they will not contain JS or backend interaction.
-Oct 22, what new functionality or technical hurdle will you have complete? 
-	- Implement Facebook Auth
-	- Implement LinkedIn Auth
+Oct 22, what new functionality or technical hurdle will you have complete?
+	- Have the site deployed on a live server (probably Linode, but maybe Rackspace). 
+	- Implement Email Authentication
 Nov 12, what new functionality or technical hurdle will you have complete?
 	- Wire up the front end with JavaScript to interact with the backend via the REST framework.
 	- All frontend functionality will be complete except for the visualizations.

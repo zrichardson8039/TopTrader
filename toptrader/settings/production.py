@@ -7,7 +7,7 @@ import dj_database_url
 DEBUG = False
 TEMPLATE_DEBUG = False # change this to false eventually
 
-DATABASES = settings.DATABASES
+DATABASES = settings.base.DATABASES
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

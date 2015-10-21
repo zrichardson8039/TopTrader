@@ -1,4 +1,4 @@
-setuptools==1.0
+setuptools
 Django==1.8.5
 dj-database-url==0.3.0
 dj-static==0.0.6

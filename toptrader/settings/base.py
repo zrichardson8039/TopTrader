@@ -83,7 +83,7 @@ USE_L10N = True
 BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
 
 STATIC_URL = '/static/'
-STATIC_ROOT = join(dirname(BASE_DIR), 'toptrader', 'staticfiles')
+STATIC_ROOT = join(dirname(BASE_DIR), 'staticfiles')
 STATICFILES_DIRS = (
     join(BASE_DIR, 'toptrader', 'static'),
 )

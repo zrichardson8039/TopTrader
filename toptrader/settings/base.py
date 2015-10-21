@@ -84,7 +84,7 @@ BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
 
 STATIC_URL = '/static/'
 STATIC_ROOT = join(BASE_DIR, 'static', 'static_root')
-STATICFILES_DIRS = join(BASE_DIR, 'static', 'static_dirs'),)
+STATICFILES_DIRS = (join(BASE_DIR, 'static', 'static_dirs'),)
 
 TEMPLATE_DIRS = (
     join(BASE_DIR, 'templates'),

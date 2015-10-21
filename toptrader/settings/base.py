@@ -15,12 +15,13 @@ from os.path import join, dirname, abspath
 import getpass
 from django.conf import global_settings
 
+
 ADMINS = (
         ('Zach Richardson', 'zrichardson1114@gmail.com')
 )
 
 INTERNAL_IPS = ('127.0.0.1',)
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*.']
 
 SECRET_KEY = 'jtb-hl38nx9tejj)3sx%n))nob9&=t%7x&n4#t7ecwdinj=96h'
 
@@ -68,7 +69,7 @@ MIDDLEWARE_CLASSES = (
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
-    'PAGINATE_BY': 25,
+    'PAGINATE_BY': 50,
 }
 
 BOOTSTRAP_ADMIN_SIDEBAR_MENU = True
@@ -79,16 +80,18 @@ LANGUAGE_CODE = 'en-us'
 USE_I18N = True
 USE_L10N = True
 
-# paths/URLs #
-PROJECT_ROOT = abspath(join(dirname(__file__), '..', '..'))
-STATIC_ROOT = join(dirname(__file__), '/static/admin/')
+BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
+
 STATIC_URL = '/static/'
+STATIC_ROOT = join(dirname(BASE_DIR), 'toptrader', 'staticfiles')
 STATICFILES_DIRS = (
-    join(PROJECT_ROOT, 'toptrader', 'static'),
+    join(BASE_DIR, 'toptrader', 'static'),
 )
+
 TEMPLATE_DIRS = (
-    join(PROJECT_ROOT, 'templates'),
+    join(BASE_DIR, 'templates'),
 )
+
 ROOT_URLCONF = 'toptrader.urls'
 TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.request',
@@ -102,3 +105,13 @@ CACHES = {
 }
 
 WSGI_APPLICATION = 'toptrader.wsgi.application'
+
+#Crispy FORM TAGs SETTINGS
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+
+#DJANGO REGISTRATION REDUX SETTINGS
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = True
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'

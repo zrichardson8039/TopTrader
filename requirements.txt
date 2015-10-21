@@ -4,7 +4,6 @@ dj-static
 gunicorn
 psycopg2
 static
-wsgiref
 whitenoise
 wheel
 djangorestframework==3.1.3

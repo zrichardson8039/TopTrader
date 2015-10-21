@@ -18,6 +18,7 @@ from django.conf import global_settings
 
 ADMINS = (
         ('Zach Richardson', 'zrichardson1114@gmail.com')
+)
 
 ALLOWED_HOSTS = ['*']
 

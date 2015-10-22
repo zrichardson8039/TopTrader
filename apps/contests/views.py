@@ -1,7 +1,26 @@
+from django.shortcuts import render
 from rest_framework import viewsets
 from apps.contests.models import Record, Game, Transaction
 from apps.contests.serializers import RecordSerializer, GameSerializer, TransactionSerializer
 from apps.common.permissions import ReadOnly
+
+
+def play(request):
+    title = "Play"
+    context = {
+        'title': title
+    }
+
+    return render(request, "gamepage.html", context)
+
+
+def profile(request):
+    title = "Profile"
+    context = {
+        'title': title
+    }
+
+    return render(request, "profile.html", context)
 
 
 class RecordViewSet(viewsets.ModelViewSet):

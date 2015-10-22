@@ -21,6 +21,7 @@ router.register('prices', stockmarket.PriceViewSet)
 
 # General URLs
 urlpatterns = [
+    url(r'^$', 'stockmarket.views.home', name='home'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include(router.urls)),
 ]

@@ -20,6 +20,13 @@ ADMINS = (
         ('Zach Richardson', 'zrichardson1114@gmail.com')
 )
 
+SITE_NAME = "toptrader"
+SITE_DOMAIN = "toptrader.us"
+SITE_HTTPS = True
+
+INTERNAL_IPS = ('127.0.0.1',)
+ALLOWED_HOSTS = ['*']
+
 ALLOWED_HOSTS = ['*']
 
 SECRET_KEY = 'jtb-hl38nx9tejj)3sx%n))nob9&=t%7x&n4#t7ecwdinj=96h'

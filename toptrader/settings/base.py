@@ -31,21 +31,8 @@ ALLOWED_HOSTS = ['*']
 
 SECRET_KEY = 'jtb-hl38nx9tejj)3sx%n))nob9&=t%7x&n4#t7ecwdinj=96h'
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
-DATABASES = {
-        'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'toptrader_dev',
-        'USER': 'toptrader_dev',
-        'PASSWORD': 'toptrader_dev',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}
 # Application definition
-
 INSTALLED_APPS = (
     'bootstrap_admin',
     'django.contrib.admin',

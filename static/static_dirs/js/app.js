@@ -1,9 +1,9 @@
 function updateValues(cash, stock, margin, total, returns) {
-//    cash = cash.toFixed(2);
-//    stock = stock.toFixed(2);
-//    margin = margin.toFixed(2);
-//    total = total.toFixed(2);
-//    returns = returns.toFixed(2);
+    cash = cash.toFixed(2);
+    stock = stock.toFixed(2);
+    margin = margin.toFixed(2);
+    total = total.toFixed(2);
+    returns = returns.toFixed(2);
 
     $('#cash').val(cash);
     $('#stock').val(stock);

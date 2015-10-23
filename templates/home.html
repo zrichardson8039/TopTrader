@@ -1,0 +1,38 @@
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="A game that allows users to trade historical stock prices against their friends in a simulated way.">
+    <meta name="author" content="Zach Richardson">
+    <link rel="icon" href="../../favicon.ico">
+
+    {% include "head_css.html"%}
+
+    <title>Welcome | TopTrader</title>
+
+</head>
+    <body background="{% static 'images/home.jpg' %}" class="homepage">
+        <div class="container">
+            <div class="row">
+                <h1 class="company-name">Top Trader</h1>
+            </div>
+            <div class="row">
+                <p class="company-description col-center">
+                    Are you a Wolf of Wall Street?
+                </p>
+            </div>
+            <div class="row">
+                <a href="{% url 'profile' %}"><input class="facebook"type="image" src="{% static 'images/facebook_login.jpg'%}" alt="Facebook Login"></a>
+            </div>
+            <div class="row">
+                <a href="{% url 'profile' %}"><input class="linkedin" type="image" src="{% static 'images/linkedin_login.png'%}" alt="Facebook Login"></a>
+            </div>
+        </div>
+    </body>
+</html>

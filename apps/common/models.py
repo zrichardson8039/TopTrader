@@ -11,3 +11,4 @@ class EditMixin(models.Model):
 
     class Meta:
         abstract = True
+

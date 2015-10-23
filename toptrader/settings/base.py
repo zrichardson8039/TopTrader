@@ -34,6 +34,7 @@ SECRET_KEY = 'jtb-hl38nx9tejj)3sx%n))nob9&=t%7x&n4#t7ecwdinj=96h'
 
 # Application definition
 INSTALLED_APPS = (
+    # django apps
     'bootstrap_admin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,9 +42,13 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # TODO enable when have a sentry key
-    # 'raven.contrib.django.raven_compat',
+
+    # third party apps
+    'crispy_forms',
+    'registration',
     'rest_framework',
+
+    # my apps
     'apps.common',
     'apps.contests',
     'apps.stockmarket',

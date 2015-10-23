@@ -11,4 +11,6 @@ tqdm
 django-pgjson
 bootstrap-admin==0.3.3
 python3-memcached==1.51
+django-crispy-forms
+django-registration-redux
 aiohttp

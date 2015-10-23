@@ -13,14 +13,14 @@
 
     {% include "head_css.html"%}
 
-    <title>Welcome | TopTrader</title>
+    {% block title %}
+    {% endblock %}
 
   </head>
   <body>
-    {% include 'navbar.html' %}
 
-    {% block jumbotron %}
-    {% endblock %}
+  {% block homepage %}
+  {% endblock %}
 
     <div class="container">
 

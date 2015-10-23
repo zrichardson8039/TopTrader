@@ -1,99 +1,80 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="TopTrader">
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Stock Trading Game">
-    <meta name="keywords" content="Trading Game, Stock Game, Stock Simulator, Trading Simulator">
-    <meta name="author" content="Zach Richardson">
-    <link rel="stylesheet" href="static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/css/style.css">
-    <script src="static/js/bower_components/angular/angular.min.js"></script>
-    <title>
-        TopTrader-Game
-    </title>
-</head>
-<body>
-    <div class="container gameplay" ng-view>
-        <div class="row">
-            <div class="col-md-6" id="competitor-portfolios">
-                <!-- TODO: This will be replaced by the users profile picture -->
-                <a href="profile.html"><img class="img-responsive profile-picture" src="http://placehold.it/100x80" alt="profile picture"></a>
-                <!-- TODO: This should dynamically update as user places trades -->
-                <table class="portfolio">
-                    <tr>
-                        <td>Cash:</td>
-                        <td id="cash-holdings">100,000</td>
-                    </tr>
-                    <tr>
-                        <td>Stock:</td>
-                        <td id="stock-holdings">0</td>
-                    </tr>
-                    <tr>
-                        <td>Total Value:</td>
-                        <td id="portfolio-value">100,000</td>
-                    </tr>
-                    <tr>
-                        <td>Total Return:</td>
-                        <td id="total-return">0</td>
-                    </tr>
-                </table>
-            </div>
+{% extends 'base.html' %}
 
-            <div class="col-md-6" id="competitor-portfolios">
-                <!-- TODO: This will be replaced by the users profile picture -->
-                <a href="profile.html"><img class="img-responsive profile-picture" src="http://placehold.it/100x80" alt="profile picture"></a>
-                <!-- TODO: This should dynamically update as user places trades -->
-                <table class="portfolio">
-                    <tr>
-                        <td>Cash:</td>
-                        <td id="cash-holdings-opponent">100,000</td>
-                    </tr>
-                    <tr>
-                        <td>Stock:</td>
-                        <td id="stock-holdings-opponent">0</td>
-                    </tr>
-                    <tr>
-                        <td>Total Value:</td>
-                        <td id="portfolio-value-opponent">100,000</td>
-                    </tr>
-                    <tr>
-                        <td>Total Return:</td>
-                        <td id="total-return-opponent">0</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="row">
-                <img class="img-responsive" id="stock-chart" src="http://placehold.it/850x350" alt="stock chart">
-            </div>
-            <div class="row">
-                <table class="trade-order">
-                    <tr>
-                        <td>Shares:</td>
-                        <td><input type="number" value="0" id="traded-shares" /></td>
-                    </tr>
-                    <tr>
-                        <td>Price:</td>
-                        <td id="current-price">$    25.00</td>
-                    </tr>
-                    <tr>
-                        <td>Proceeds:</td>
-                        <td id="trade-proceeds">$    250.00</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-md-6">
-                <button type="button" class="trade-button" id="buy-button">BUY</button>
-            </div>
-            <div class="col-md-6">
-                <button type="button" class="trade-button" id="sell-button">SELL</button>
-            </div>
+{% block content %}
+<div class="container gameplay" ng-view>
+    <div class="row">
+        <div class="col-md-6" id="competitor-portfolios">
+            <!-- TODO: This will be replaced by the users profile picture -->
+            <a href="profile.html"><img class="img-responsive profile-picture" src="http://placehold.it/100x80" alt="profile picture"></a>
+            <!-- TODO: This should dynamically update as user places trades -->
+            <table class="portfolio">
+                <tr>
+                    <td>Cash:</td>
+                    <td id="cash-holdings">100,000</td>
+                </tr>
+                <tr>
+                    <td>Stock:</td>
+                    <td id="stock-holdings">0</td>
+                </tr>
+                <tr>
+                    <td>Total Value:</td>
+                    <td id="portfolio-value">100,000</td>
+                </tr>
+                <tr>
+                    <td>Total Return:</td>
+                    <td id="total-return">0</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="col-md-6" id="competitor-portfolios">
+            <!-- TODO: This will be replaced by the users profile picture -->
+            <a href="profile.html"><img class="img-responsive profile-picture" src="http://placehold.it/100x80" alt="profile picture"></a>
+            <!-- TODO: This should dynamically update as user places trades -->
+            <table class="portfolio">
+                <tr>
+                    <td>Cash:</td>
+                    <td id="cash-holdings-opponent">100,000</td>
+                </tr>
+                <tr>
+                    <td>Stock:</td>
+                    <td id="stock-holdings-opponent">0</td>
+                </tr>
+                <tr>
+                    <td>Total Value:</td>
+                    <td id="portfolio-value-opponent">100,000</td>
+                </tr>
+                <tr>
+                    <td>Total Return:</td>
+                    <td id="total-return-opponent">0</td>
+                </tr>
+            </table>
+        </div>
+        <div class="row">
+            <img class="img-responsive" id="stock-chart" src="http://placehold.it/850x350" alt="stock chart">
+        </div>
+        <div class="row">
+            <table class="trade-order">
+                <tr>
+                    <td>Shares:</td>
+                    <td><input type="number" value="0" id="traded-shares" /></td>
+                </tr>
+                <tr>
+                    <td>Price:</td>
+                    <td id="current-price">$    25.00</td>
+                </tr>
+                <tr>
+                    <td>Proceeds:</td>
+                    <td id="trade-proceeds">$    250.00</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <button type="button" class="trade-button" id="buy-button">BUY</button>
+        </div>
+        <div class="col-md-6">
+            <button type="button" class="trade-button" id="sell-button">SELL</button>
         </div>
     </div>
-    <footer>
-        <a class="footer-link" href="#">Privacy</a>
-        <a class="footer-link" href="#">Copyright</a>
-        <a class="footer-link" href="#">About</a>
-        <a class="footer-link" href="#">Learn</a>
-    </footer>
-</body>
-</html>
+</div>
+{% endblock %}

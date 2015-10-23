@@ -1,18 +1,9 @@
-footer {
-	padding-left: 70%;
-	background-color: #303030;
-	color: white;
-	height: 60px;
-}
-
 .homepage {
-	background-image: url('http://www.kinetictrader.com/wp-content/uploads/2012/04/7419177_s.jpg');
 	background-repeat: no-repeat;
-	background-size: cover;
-	display: block;
-	position relative;
-	width: 100%;
-	height: 621px;
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
 }
 
 .company-name {
@@ -24,7 +15,7 @@ footer {
 }
 
 .company-description {
-	margin-left: 17%;
+	text-align: center;
 	margin-top: 3%;
 	font-style: italic;
 	font-size: 1.5em;
@@ -99,8 +90,7 @@ footer {
 }
 
 #record {
-	margin-left: 80%;
-	margin-top: 7%;
+	margin-top: 12%;
 }
 
 #profile-page-picture {
@@ -123,15 +113,16 @@ footer {
 
 #new-game {
 	background-color: green;
+	margin-left: 50%;
 }
 
 #sign-out {
-	margin-left: -45%;
 	background-color: blue;
 }
 
 #opponents-table {
 	margin-top: 5%;
+	width: 100%;
 }
 
 .header-row {
@@ -157,8 +148,6 @@ footer {
 .analytics-graph {
 	float: left;
 	margin-top: 2%;
-	margin-left: -3%;
-	margin-bottom: 3%;
 }
 
 #cumulative-returns {

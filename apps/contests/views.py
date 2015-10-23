@@ -11,7 +11,7 @@ def play(request):
         'title': title
     }
 
-    return render(request, "gamepage.html", context)
+    return render(request, "play.html", context)
 
 
 def profile(request):

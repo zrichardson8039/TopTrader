@@ -40,18 +40,26 @@
 	height: 621px;
 }
 
-#competitor-portfolios {
-	margin-top: 1%;
-}
-
 .profile-picture {
 	float: left;
 	margin-left: 20%;
 	margin-right: 5%;
+	margin-bottom: 3%;
+	margin-top: 2%;
 }
 
 .portfolio {
 	text-align: right;
+	margin-top: 2%;
+}
+
+.portfolio-label {
+	font-style: italic;
+}
+
+.portfolio-value {
+	color: grey;
+	border: none;
 }
 
 #stock-chart {

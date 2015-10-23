@@ -5,51 +5,42 @@
     <div class="row">
         <div class="col-md-6" id="competitor-portfolios">
             <!-- TODO: This will be replaced by the users profile picture -->
-            <a href="{% url 'profile' %}"><img class="img-responsive profile-picture" src="http://placehold.it/100x80" alt="profile picture"></a>
+            <a href="{% url 'profile' %}"><img class="img-responsive profile-picture" src="http://placehold.it/100x100" alt="profile picture"></a>
             <!-- TODO: This should dynamically update as user places trades -->
             <table class="portfolio">
                 <tr>
-                    <td>Cash:</td>
-                    <td id="cash-holdings">100,000</td>
+                    <td class="portfolio-label">Cash:</td>
+                    <td>
+                        <span>$<input type="number" class="portfolio-value" id="cash" readonly="readonly" value=100000.00></span>
+                    </td>
                 </tr>
                 <tr>
-                    <td>Stock:</td>
-                    <td id="stock-holdings">0</td>
+                    <td class="portfolio-label">Margin:</td>
+                    <td>
+                        <span>$<input type="number" class="portfolio-value" id="margin" readonly="readonly" value=0.00></span>
+                    </td>
                 </tr>
                 <tr>
-                    <td>Total Value:</td>
-                    <td id="portfolio-value">100,000</td>
+                    <td class="portfolio-label">Stock:</td>
+                    <td>
+                        <span>$<input type="number" class="portfolio-value" id="stock" readonly="readonly" min=0 value=0.00></span>
+                    </td>
                 </tr>
                 <tr>
-                    <td>Total Return:</td>
-                    <td id="total-return">0</td>
+                    <td class="portfolio-label">Total Value:</td>
+                    <td>
+                        <span>$<input type="number" class="portfolio-value" id="total" readonly="readonly" value=100000.00></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="portfolio-label">Total Return:</td>
+                    <td>
+                        <span>$<input type="number" class="portfolio-value" id="returns" readonly="readonly" value=0.00></span>
+                    </td>
                 </tr>
             </table>
         </div>
 
-        <div class="col-md-6" id="competitor-portfolios">
-            <!-- TODO: This will be replaced by the users profile picture -->
-            <a href="{% url 'profile' %}"><img class="img-responsive profile-picture" src="http://placehold.it/100x80" alt="profile picture"></a>
-            <!-- TODO: This should dynamically update as user places trades -->
-            <table class="portfolio">
-                <tr>
-                    <td>Cash:</td>
-                    <td id="cash-holdings-opponent">100,000</td>
-                </tr>
-                <tr>
-                    <td>Stock:</td>
-                    <td id="stock-holdings-opponent">0</td>
-                </tr>
-                <tr>
-                    <td>Total Value:</td>
-                    <td id="portfolio-value-opponent">100,000</td>
-                </tr>
-                <tr>
-                    <td>Total Return:</td>
-                    <td id="total-return-opponent">0</td>
-                </tr>
-            </table>
-        </div>
         <div class="row">
             <img class="img-responsive" id="stock-chart" src="http://placehold.it/850x350" alt="stock chart">
         </div>
@@ -57,23 +48,29 @@
             <table class="trade-order">
                 <tr>
                     <td>Shares:</td>
-                    <td><input type="number" value="0" id="traded-shares" /></td>
+                    <td>
+                        <input type="number" id="shares" value=1000 onchange="calcProceeds()">
+                    </td>
                 </tr>
                 <tr>
                     <td>Price:</td>
-                    <td id="current-price">$    25.00</td>
+                    <td>
+                        <span>$<input type="number" class="trade-value" id="price" readonly="readonly" value=25.00></span>
+                    </td>
                 </tr>
                 <tr>
                     <td>Proceeds:</td>
-                    <td id="trade-proceeds">$    250.00</td>
+                    <td>
+                        <span>$<input type="number" class="trade-value" id="proceeds" readonly="readonly" value=2500.00></span>
+                    </td>
                 </tr>
             </table>
         </div>
         <div class="col-md-6">
-            <button type="button" class="trade-button" id="buy-button">BUY</button>
+            <button type="button" class="trade-button" id="buy-button" onclick="buy()">BUY</button>
         </div>
         <div class="col-md-6">
-            <button type="button" class="trade-button" id="sell-button">SELL</button>
+            <button type="button" class="trade-button" id="sell-button" onclick="sell()">SELL</button>
         </div>
     </div>
 </div>

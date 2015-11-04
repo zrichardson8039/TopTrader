@@ -7,7 +7,7 @@
     <h2>Register!</h2>
 </div>
 <div class="col-sm-6">
-    <form method='POST' action="{% url 'profile' %}">{% csrf_token %}
+    <form method='POST' action="{% url 'registration' %}">{% csrf_token %}
         {{ form|crispy }}
 
         <input class='btn btn-default' type='submit' value='Register' />

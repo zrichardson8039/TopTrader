@@ -14,9 +14,7 @@ class Game(models.Model):
     won = models.BooleanField(null=False, default=False)
     net_income = models.DecimalField(max_digits=12, decimal_places=2, default=DEFAULT_NET_INCOME)
     def __str__(self):
-        if self.won:
-            return "WON"
-        return "LOST"
+        return ("{} - {}".format(self.trader, self.instance.pk))
 
 
 class Transaction(models.Model):

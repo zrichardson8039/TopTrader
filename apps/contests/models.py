@@ -29,4 +29,4 @@ class Transaction(models.Model):
     price = models.IntegerField(null=False, default=DEFAULT_PRICE)
     game = models.ForeignKey(Game)
     def __str__(self):
-        return "{} {} shares at {}".format(self.transaction_type, self.shares, self.quote)
+        return "{} {} shares at {}".format(self.transaction_type, self.shares, self.price)

@@ -26,7 +26,7 @@ class Transaction(models.Model):
     )
     transaction_type = models.CharField(max_length=2, choices=TRANSACTION_TYPES, default="H")
     shares = models.IntegerField(null=False, default=0)
-    price = models.ForeignKey(Price, null=False, default=DEFAULT_PRICE)
+    price = models.IntegerField(null=False, default=DEFAULT_PRICE)
     game = models.ForeignKey(Game)
     def __str__(self):
         return "{} {} shares at {}".format(self.transaction_type, self.shares, self.quote)

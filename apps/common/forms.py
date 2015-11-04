@@ -4,13 +4,6 @@ from django.forms import ModelForm
 
 
 class RegistrationForm(ModelForm):
-    first_name = forms.CharField(label=(u'First Name'))
-    last_name = forms.CharField(label=(u'Last Name'))
-    username = forms.CharField(label=(u'Username'))
-    email = forms.EmailField(label=(u'Email'))
-    password = forms.CharField(label=(u'Password'), widget=forms.PasswordInput(render_value=False))
-    verify_password = forms.CharField(label=(u'Verify Password'), widget=forms.PasswordInput(render_value=False))
-
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'password']

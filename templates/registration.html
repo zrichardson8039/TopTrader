@@ -3,5 +3,15 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-{{form}}
+<div class="row">
+    <h2 class="page-title pull-left">Register!</h2>
+</div>
+<div class="col-sm-6">
+    <form class="form-input" method='POST' action="{% url 'profile' %}">{% csrf_token %}
+        {{ form|crispy }}
+
+        <input class='btn btn-default' type='submit' value='Register' />
+
+    </form>
+</div>
 {% endblock %}

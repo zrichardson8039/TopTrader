@@ -25,10 +25,5 @@ def registration(request):
         password = form.cleaned_data['first_name']
         user = User.objects.create_user(first_name=first_name, last_name=last_name, username=username, email=email, password=password)
         user.save()
-        return HttpResponseRedirect('/profile/')
-    else:
-        return render(request, "registration.html", {})
-    else:
-        form = RegistrationForm()
-        context = {"form": form}
-        return render(request, "registration.html", {})
+    context = {"form": form}
+    return render(request, "registration.html", context)

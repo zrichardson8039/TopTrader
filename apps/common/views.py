@@ -1,5 +1,7 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import RegistrationForm
+from django.contrib.auth.models import User
 
 
 

@@ -7,13 +7,9 @@ DEBUG = False
 TEMPLATE_DEBUG = False # change this to false eventually
 
 DATABASES = {
-        'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'toptrader_dev',
-        'USER': 'toptrader_dev',
-        'PASSWORD': 'toptrader_dev',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': join(BASE_DIR, 'db.sqlite3'),
     }
 }
 

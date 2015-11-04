@@ -10,7 +10,7 @@ DEFAULT_NET_INCOME = 0
 DEFAULT_PRICE = 0
 
 
-class Record(EditMixin):
+class Record(models.Model):
     trader = models.ForeignKey(User, null=False, default=DEFAULT_USER)
     wins = models.IntegerField(null=True, default=0)
     losses = models.IntegerField(null=True, default=0)
@@ -19,7 +19,7 @@ class Record(EditMixin):
         return "{} ({}-{})".format(self.trader, str(self.wins), str(self.losses))
 
 
-class Game(EditMixin):
+class Game(models.Model):
     contestant = models.ForeignKey("Record", related_name='contestant')
     opponent = models.ForeignKey("Record", related_name='opponent')
     winner = models.ForeignKey("Record", related_name='winner')
@@ -27,13 +27,12 @@ class Game(EditMixin):
         return "{} vs {}".format(self.contestant, self.opponent)
 
 
-class Transaction(EditMixin):
+class Transaction(models.Model):
     TRANSACTION_TYPES = (
         ('BO', "BUY-TO-OPEN"),
         ('BC', "BUY-TO-CLOSE"),
         ('SO', "SELL-TO-OPEN"),
         ('SC', "SELL-TO-CLOSE"),
-        ('H', "HOLD")
     )
     transaction_type = models.CharField(max_length=2, choices=TRANSACTION_TYPES, default="H")
     shares = models.IntegerField(null=False, default=0)

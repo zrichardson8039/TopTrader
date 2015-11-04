@@ -16,8 +16,7 @@ def home(request):
 def registration(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect('/profile/')
-    if request.method == "POST":
-        form = RegistrationForm(request.POST)
+    form = RegistrationForm(request.POST or None)
         if form.is_valid():
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['first_name']

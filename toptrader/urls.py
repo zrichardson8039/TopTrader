@@ -10,7 +10,6 @@ import apps.stockmarket.views as stockmarket
 router = routers.DefaultRouter()
 
 # Contests
-router.register('records', contests.RecordViewSet)
 router.register('games', contests.GameViewSet)
 router.register('transactions', contests.TransactionViewSet)
 
@@ -24,6 +23,7 @@ urlpatterns = [
     url(r'^$', 'apps.common.views.home', name='home'),
     url(r'^play/$', 'apps.contests.views.play', name='play'),
     url(r'^profile/$', 'apps.contests.views.profile', name='profile'),
+    url(r'^registration/$', 'apps.common.views.registration', name='registration'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include(router.urls)),
 ]

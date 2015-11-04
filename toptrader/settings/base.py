@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ['*']
 
 SECRET_KEY = 'jtb-hl38nx9tejj)3sx%n))nob9&=t%7x&n4#t7ecwdinj=96h'
 
+# provides django with model to use for authentication
+AUTH_PROFILE_MODULE = 'django.contrib.auth.User'
 
 # Application definition
 INSTALLED_APPS = (

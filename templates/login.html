@@ -4,15 +4,13 @@
 
 {% block content %}
 <div class="row">
-    <h2>Register!</h2>
+    <h2>Login</h2>
 </div>
 <div class="col-sm-6">
-    <form method='POST' action="{% url 'registration' %}">
+    <form method='POST' action="{% url 'login_request' %}">
         {% csrf_token %}
         {{ form|crispy }}
-
-        <input class='btn btn-default' type='submit' value='Register' />
-
+        <input class='btn btn-default' type='submit' value='Login' />
     </form>
 </div>
 {% endblock %}

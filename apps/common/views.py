@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from .forms import RegistrationForm
+from .forms import RegistrationForm, LoginForm
+from django.contrib.auth import authentication, login, logout
 from django.contrib.auth.models import User
 
 
@@ -31,3 +32,27 @@ def registration(request):
     else:
         context = {"form": form}
         return render(request, "registration.html", context)
+
+def login_request(request):
+    if request.user.is_valid():
+        return HttpResponseRedirect('/profile/')
+    form = LoginForm(request.POST or None)
+    context = {
+        "form": form
+    }
+    if form.is_valid():
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        trader = authenticate(username=username, password=password)
+        if trader is not None:
+            login(request, trader)
+            return HttpResponseRedirect('/profile/')
+        else:
+            return HttpResponseRedirect('login')
+    else:
+        reutrn render(request, "login.html", context)
+
+def logout_request(request):
+    logout(request)
+    return HttpResponseRedirect('/')
+

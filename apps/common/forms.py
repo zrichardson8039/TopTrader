@@ -39,5 +39,9 @@ class RegistrationForm(ModelForm):
                 raise forms.ValidationError(_("The two password fields didn't match."))
         return password1
 
+class LoginForm(forms.Form):
+    username = forms.CharField(label=(u'Username'))
+    password = forms.CharField(label=(u'Password'), widget=forms.PasswordInput(render_value=False))
+
 
 

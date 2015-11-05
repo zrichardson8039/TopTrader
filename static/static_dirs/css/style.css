@@ -8,7 +8,7 @@
 
 .company-name {
 	margin-left: 35%;
-	margin-top: 10%;
+	margin-top: 20%;
 	font-weight: bold;
 	font-size: 5em;
 	color: white;
@@ -24,7 +24,11 @@
 
 .home-button {
     margin-left: 45%;
-    margin-top: 2%;
+    margin-top: 1%;
+}
+
+#login-button {
+    margin-left: 46%;
 }
 
 .footer-link {

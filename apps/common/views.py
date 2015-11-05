@@ -50,7 +50,7 @@ def login_request(request):
         else:
             return HttpResponseRedirect('login')
     else:
-        reutrn render(request, "login.html", context)
+        return render(request, "login.html", context)
 
 def logout_request(request):
     logout(request)

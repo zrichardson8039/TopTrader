@@ -11,67 +11,40 @@
                 <a href="{% url 'play' %}"><button class="profile-button" id="new-game" type="button">New Game</button></a>
         </div>
         <div class="col-sm-3 col-xs-4">
-            <a href="/logout/"><button class="profile-button" id="sign-out" type="button">Sign Out</button></a>
+            <a href="/logout/`"><button class="profile-button" id="sign-out" type="button">Sign Out</button></a>
         </div>
     </div>
     <div class="col-xs-12">
-        <table id="opponents-table">
+        <table id="game-history">
             <tr class="header-row">
-                <td width="30%">Name</td>
-                <td width="10%">You</td>
-                <td width="10%">Opponent</td>
-                <td width="10%">Buys</td>
-                <td width="10%">Sells</td>
+                <td width="10%">Game</td>
+                <td width="20%">Net Income/Loss</td>
+                <td width="10%">Buys to Open</td>
+                <td width="10%">Buys to Close</td>
+                <td width="10%">Sells to Open</td>
+                <td width="10%">Sells to Close</td>
             </tr>
-            <tr class="opponent-row">
-                <td width="30%">Me</td>
-                <td width="10%">$ 12,354.35</0></td>
-                <td width="10%">$  9,354.35</td>
-                <td width="10%">45</td>
-                <td width="10%">45</td>
-            </tr>
-            <tr class="opponent-row-even">
-                <td width="30%">Me</td>
-                <td width="10%">$ 12,354.35</0></td>
-                <td width="10%">$  9,354.35</td>
-                <td width="10%">45</td>
-                <td width="10%">45</td>
-            </tr>
-            <tr class="opponent-row">
-                <td width="30%">Me</td>
-                <td width="10%">$ 12,354.35</0></td>
-                <td width="10%">$  9,354.35</td>
-                <td width="10%">45</td>
-                <td width="10%">45</td>
-            </tr>
-            <tr class="opponent-row-even">
-                <td width="30%">Me</td>
-                <td width="10%">$ 12,354.35</0></td>
-                <td width="10%">$  9,354.35</td>
-                <td width="10%">45</td>
-                <td width="10%">45</td>
-            </tr>
-            <tr class="opponent-row">
-                <td width="30%">Me</td>
-                <td width="10%">$ 12,354.35</0></td>
-                <td width="10%">$  9,354.35</td>
-                <td width="10%">45</td>
-                <td width="10%">45</td>
-            </tr>
-            <tr class="opponent-row-even">
-                <td width="30%">Me</td>
-                <td width="10%">$ 12,354.35</0></td>
-                <td width="10%">$  9,354.35</td>
-                <td width="10%">45</td>
-                <td width="10%">45</td>
-            </tr>
-            <tr class="total-row">
-                <td width="30%">Total</td>
-                <td width="10%">$ 74,126.10</0></td>
-                <td width="10%">$ 56,126.10</td>
-                <td width="10%">270</td>
-                <td width="10%">270</td>
-            </tr>
+            {% for game in all_games reversed %}
+                {% if forloop.counter|divisibleby:2 %}
+                    <tr class="opponent-row-even">
+                        <td width="10%">{{ game.game_id }}</td>
+                        <td width="30%">{{ game.net_income }}</td>
+                        <td width="10%">{{ game.buy_to_open }}</td>
+                        <td width="10%">{{ game.buy_to_close }}</td>
+                        <td width="10%">{{ game.sell_to_open }}</td>
+                        <td width="10%">{{ game.sell_to_close }}</td>
+                    </tr>
+                {% else %}
+                    <tr class="opponent-row">
+                        <td width="10%">{{ game.game_id }}</td>
+                        <td width="30%">{{ game.net_income }}</td>
+                        <td width="10%">{{ game.buy_to_open }}</td>
+                        <td width="10%">{{ game.buy_to_close }}</td>
+                        <td width="10%">{{ game.sell_to_open }}</td>
+                        <td width="10%">{{ game.sell_to_close }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
         </table>
         <div class="row">
             <div class="col-md-6">

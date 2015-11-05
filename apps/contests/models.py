@@ -24,7 +24,7 @@ class Transaction(models.Model):
         ('SO', "SELL-TO-OPEN"),
         ('SC', "SELL-TO-CLOSE"),
     )
-    transaction_type = models.CharField(max_length=2, choices=TRANSACTION_TYPES, default="H")
+    transaction_type = models.CharField(max_length=2, choices=TRANSACTION_TYPES)
     shares = models.IntegerField(null=False, default=0)
     price = models.IntegerField(null=False, default=DEFAULT_PRICE)
     game = models.ForeignKey(Game)

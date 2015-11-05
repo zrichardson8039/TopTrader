@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^profile/$', 'apps.contests.views.profile', name='profile'),
     url(r'^registration/$', 'apps.common.views.registration', name='registration'),
     url(r'^login/$', 'apps.common.views.login_request', name='login_request'),
-    url(r'^logout/$', 'apps.common.views.logout_request', name='logout_request'),
+    url(r'^logout/', 'apps.common.views.logout_request', name='logout_request'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include(router.urls)),
 ]

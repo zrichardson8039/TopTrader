@@ -22,13 +22,9 @@
 	color: white;
 }
 
-.facebook {
-	margin-left: 40%;
-	margin-top: 5%;
-}
-
-.linkedin {
-	margin-left: 40%;
+.home-button {
+    margin-left: 40%;
+    margin-top: 5%;
 }
 
 .footer-link {

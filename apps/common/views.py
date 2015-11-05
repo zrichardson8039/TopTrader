@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import RegistrationForm, LoginForm
-from django.contrib.auth import authentication, login, logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 
@@ -34,12 +34,9 @@ def registration(request):
         return render(request, "registration.html", context)
 
 def login_request(request):
-    if request.user.is_valid():
+    if request.user.is_authenticated():
         return HttpResponseRedirect('/profile/')
     form = LoginForm(request.POST or None)
-    context = {
-        "form": form
-    }
     if form.is_valid():
         username = form.cleaned_data['username']
         password = form.cleaned_data['password']
@@ -48,8 +45,9 @@ def login_request(request):
             login(request, trader)
             return HttpResponseRedirect('/profile/')
         else:
-            return HttpResponseRedirect('login')
+            return HttpResponseRedirect('/login/')
     else:
+        context = {"form": form}
         return render(request, "login.html", context)
 
 def logout_request(request):

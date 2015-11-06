@@ -1,3 +1,6 @@
+transactions = []
+
+
 function updateValues(cash, stock, margin, total, returns) {
     cash = cash.toFixed(2);
     stock = stock.toFixed(2);
@@ -12,7 +15,21 @@ function updateValues(cash, stock, margin, total, returns) {
     $('#returns').val(returns);
 }
 
+function createTransaction(transaction_type) {
+    var price = document.getElementById('price').value;
+    var shares = document.getElementById('shares').value;
+
+    var transaction = {
+        'price': price,
+        'shares': shares,
+        'transaction_type': transaction_type,
+    };
+    return transaction;
+}
+
 function buy() {
+    transaction = createTransaction('B');
+    transactions.push(transaction);
     var cash = Number(document.getElementById('cash').value);
     var margin = Number(document.getElementById('margin').value);
     var stock = Number(document.getElementById('stock').value);
@@ -30,9 +47,12 @@ function buy() {
     var returns = total - 100000.00;
 
     updateValues(cash, stock, margin, total, returns);
+    console.log(transactions);
 }
 
 function sell() {
+    transaction = createTransaction('S');
+    transactions.push(transaction);
     var cash = Number(document.getElementById('cash').value);
     var margin = Number(document.getElementById('margin').value);
     var stock = Number(document.getElementById('stock').value);
@@ -54,6 +74,7 @@ function sell() {
     var returns = total - 100000.00;
 
     updateValues(cash, stock, margin, total, returns)
+    console.log(transactions);
 }
 
 function calcProceeds() {

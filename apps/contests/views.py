@@ -1,15 +1,36 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from apps.contests.models import Game, Transaction
 from apps.contests.serializers import GameSerializer, TransactionSerializer
 from apps.common.permissions import ReadOnly
+from .models import Game, Transaction
+from .forms import EndGameForm, TransactionForm
 
 
-def play(request):
-    title = "Play"
+def NewGame(request):
+    game = Game.objects.create(trader=request.user)
+    form1 = EndGameForm(request.POST or None)
+    if form1.is_valid():
+        net_income = form1.cleaned_data['net_income']
+        won = False
+        if net_income > 0:
+            won = True
+        game.net_income = net_income
+        game.won = won
+        game.save()
+
+    form2 = TransactionForm(request.POST or None)
+    if form2.is_valid():
+        shares = form2.cleaned_data['shares']
+        price = form2.cleaned_data['price']
+        transaction_type = form2.cleaned_data['transaction_type']
+        transaction = Transaction.objects.create(game=game, shares=shares, price=price, transaction_type=transaction_type)
+        transaction.save()
+
     context = {
-        'title': title
+        "game_form": form1,
+        "transaction_form": form2
     }
+
 
     return render(request, "play.html", context)
 

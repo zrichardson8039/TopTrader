@@ -1,3 +1,4 @@
+from django.contrib import auth
 from django.shortcuts import render
 from rest_framework import viewsets
 from apps.contests.serializers import GameSerializer, TransactionSerializer
@@ -7,7 +8,7 @@ from .forms import EndGameForm, TransactionForm
 
 
 def NewGame(request):
-    game = Game.objects.create(trader=request.user)
+    game = Game.objects.create(trader=auth.get_user(request))
     form1 = EndGameForm(request.POST or None)
     if form1.is_valid():
         net_income = form1.cleaned_data['net_income']
@@ -25,18 +26,15 @@ def NewGame(request):
         transaction_type = form2.cleaned_data['transaction_type']
         transaction = Transaction.objects.create(game=game, shares=shares, price=price, transaction_type=transaction_type)
         transaction.save()
-
     context = {
         "game_form": form1,
         "transaction_form": form2
     }
-
-
     return render(request, "play.html", context)
 
 
 def profile(request):
-    games = Game.objects.filter(trader=request.user)
+    games = Game.objects.filter(trader=auth.get_user(request))
     all_games = []
     for g in games:
         buy_to_open = Transaction.objects.filter(game=g, transaction_type='BO').count()

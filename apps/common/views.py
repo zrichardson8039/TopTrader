@@ -28,7 +28,12 @@ def registration(request):
         password = form.cleaned_data['password']
         user = User.objects.create_user(first_name=first_name, last_name=last_name, username=username, email=email, password=password)
         user.save()
-        return HttpResponseRedirect('/profile/')
+        trader = authenticate(username=username, password=password)
+        if trader is not None:
+            login(request, trader)
+            return HttpResponseRedirect('/profile/')
+        else:
+            return HttpResponseRedirect('/login/')
     else:
         context = {"form": form}
         return render(request, "registration.html", context)

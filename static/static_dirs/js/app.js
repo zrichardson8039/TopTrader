@@ -16,13 +16,16 @@ function updateValues(cash, stock, margin, total, returns) {
 }
 
 function createTransaction(transaction_type) {
+    var game = "{{ game_id }}"
     var price = Number(document.getElementById('price').value);
     var shares = Number(document.getElementById('shares').value);
     var commission = Number(document.getElementById('commission').value);
 
     var transaction = {
+        'game': game,
         'price': price,
         'shares': shares,
+        'commission': commission,
         'transaction_type': transaction_type,
     };
     return transaction;
@@ -50,11 +53,20 @@ function buy() {
 
     updateValues(cash, stock, margin, total, returns);
     console.log(transactions);
+
+    $.ajax({
+            url: 'http://localhost:8000/api/transactions/',
+            type: 'post',
+            data: transactions,
+            dataType: 'JSON',
+            success: function(data) {
+                updateValues(cash, stock, margin, total, returns)
+            }
+    });
 }
 
 function sell() {
     transaction = createTransaction('S');
-    transactions.push(transaction);
     var cash = Number(document.getElementById('cash').value);
     var margin = Number(document.getElementById('margin').value);
     var stock = Number(document.getElementById('stock').value);
@@ -78,6 +90,16 @@ function sell() {
 
     updateValues(cash, stock, margin, total, returns)
     console.log(transactions);
+
+    $.ajax({
+            url: 'http://localhost:8000/api/transactions/',
+            type: 'post',
+            data: transactions,
+            dataType: 'JSON',
+            success: function(data) {
+                updateValues(cash, stock, margin, total, returns)
+            }
+    });
 }
 
 function calcProceeds() {
@@ -89,5 +111,41 @@ function calcProceeds() {
     proceeds = proceeds.toFixed(2);
     $('#proceeds').val(proceeds);
 }
+
+$(document).ready(function() {
+    $('#submit-game-button').click(function() {
+        var game = "{{ game_id }}"
+        var cash = Number(document.getElementById('cash').value);
+        var margin = Number(document.getElementById('margin').value);
+        var stock = Number(document.getElementById('stock').value);
+        var total_value = Number(document.getElementById('total').value);
+        var net_income = Number(document.getElementById('returns').value);
+
+        var gameData = {
+            'id': game,
+            'cash': cash,
+            'margin': margin,
+            'stock': stock,
+            'total_value': total_value,
+            'net_income': net_income,
+        }
+
+        $.ajax({
+            url: 'http://localhost:8000/api/games/',
+            type: 'put',
+            data: gameData,
+            dataType: 'JSON',
+            success: function(data) {
+                var jsonData = $.parseJSON(data);
+                $('#cash').val(jsonData.cash);
+                $('#margin').val(jsonData.margin);
+                $('#stock').val(jsonData.stock);
+                $('#total').val(jsonData.total_value);
+                $('#returns').val(jsonData.net_income);
+            }
+        });
+    });
+});
+
 
 

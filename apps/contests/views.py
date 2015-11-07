@@ -17,18 +17,6 @@ def new_game(request):
     return render(request, "play.html", context)
 
 
-def submit_game(request):
-    game = Game.objects.filter(trader=auth.get_user(request)).reverse()[0]
-    context = {
-        'net_income': game.net_income,
-        'cash': game.cash,
-        'margin': game.margin,
-        'stock': game.stock,
-        'total_value': game.total_value,
-    }
-    return render(request, "submitgame.html", context)
-
-
 def profile(request):
     games = Game.objects.filter(trader=auth.get_user(request))
     all_games = []

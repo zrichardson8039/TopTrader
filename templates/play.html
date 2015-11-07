@@ -73,10 +73,22 @@
             </table>
         </div>
         <div class="col-md-6">
-            <button type="button" class="trade-button" id="buy-button" onclick="buy()">BUY</button>
+            <form method="POST" action="">
+                {% csrf_token %}
+                <button type="button" class="trade-button" id="buy-button" onclick="buy()">BUY</button>
+            </form>
         </div>
         <div class="col-md-6">
-            <button type="button" class="trade-button" id="sell-button" onclick="sell()">SELL</button>
+            <form method="POST" action="">
+                {% csrf_token %}
+                <button type="button" class="trade-button" id="sell-button" onclick="sell()">SELL</button>
+            </form>
+        </div>
+        <div class="row">
+            <form method="PUT" action="">
+                {% csrf_token %}
+                <button class="btn btn-lg btn-primary" id="submit-game-button" type="button">Submit Game</button>
+            </form>
         </div>
     </div>
 </div>

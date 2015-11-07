@@ -162,3 +162,19 @@
 #cumulative-returns {
 	margin-left: -1%;
 }
+
+.submitgame {
+    margin-top: 10%;
+    margin-left: 35%;
+}
+
+.submitgame-value {
+	color: grey;
+	border: none;
+	text-align: right;
+}
+
+#submit-game-button {
+    margin-top: 3%;
+    margin-left: 40%;
+}

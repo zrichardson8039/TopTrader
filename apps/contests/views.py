@@ -4,50 +4,61 @@ from rest_framework import viewsets
 from apps.contests.serializers import GameSerializer, TransactionSerializer
 from apps.common.permissions import ReadOnly
 from .models import Game, Transaction
-from .forms import EndGameForm, TransactionForm
+from .forms import GameForm, TransactionForm
 
 
-def NewGame(request):
+def new_game(request):
     game = Game.objects.create(trader=auth.get_user(request))
-    form1 = EndGameForm(request.POST or None)
-    if form1.is_valid():
-        net_income = form1.cleaned_data['net_income']
-        won = False
-        if net_income > 0:
-            won = True
-        game.net_income = net_income
-        game.won = won
-        game.save()
+    game.save()
 
-    form2 = TransactionForm(request.POST or None)
-    if form2.is_valid():
-        shares = form2.cleaned_data['shares']
-        price = form2.cleaned_data['price']
-        transaction_type = form2.cleaned_data['transaction_type']
-        transaction = Transaction.objects.create(game=game, shares=shares, price=price, transaction_type=transaction_type)
-        transaction.save()
     context = {
-        "game_form": form1,
-        "transaction_form": form2
+        "game_id": game.id
     }
     return render(request, "play.html", context)
+
+
+def submit_game(request):
+    game = Game.objects.filter(trader=auth.get_user(request)).reverse()[0]
+    context = {
+        'net_income': game.net_income,
+        'cash': game.cash,
+        'margin': game.margin,
+        'stock': game.stock,
+        'total_value': game.total_value,
+    }
+    return render(request, "submitgame.html", context)
 
 
 def profile(request):
     games = Game.objects.filter(trader=auth.get_user(request))
     all_games = []
     for g in games:
-        buy_to_open = Transaction.objects.filter(game=g, transaction_type='BO').count()
-        buy_to_close = Transaction.objects.filter(game=g, transaction_type='BC').count()
-        sell_to_open = Transaction.objects.filter(game=g, transaction_type='SO').count()
-        sell_to_close = Transaction.objects.filter(game=g, transaction_type='SC').count()
+        buys = Transaction.objects.filter(game=g, transaction_type='B')
+        sells = Transaction.objects.filter(game=g, transaction_type='S')
+        buys_count = buys.count()
+        sells_count = sells.count()
+
+        sells_proceeds = 0
+        for s in sells:
+            sells_proceeds = sells_proceeds + (s.price * s.shares)
+
+        buys_proceeds = 0
+        for b in buys:
+            buys_proceeds = buys_proceeds + (b.price * b.shares)
+
+        commissions = (buys_count + sells_count) * 15
+
         game_details = {
-            "game_id": g.id,
+            "cash": g.cash,
+            "margin": g.margin,
+            "stock": g.stock,
+            "total_value": g.total_value,
             "net_income": g.net_income,
-            "buy_to_open": buy_to_open,
-            "buy_to_close": buy_to_close,
-            "sell_to_open": sell_to_open,
-            "sell_to_close": sell_to_close
+            "buys": buys_count,
+            "buys_proceeds": buys_proceeds,
+            "sells": sells_count,
+            "sells_proceeds": sells_proceeds,
+            "commissions": commissions
         }
         all_games.append(game_details)
     context = {

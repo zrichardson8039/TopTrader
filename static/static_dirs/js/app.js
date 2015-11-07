@@ -16,8 +16,9 @@ function updateValues(cash, stock, margin, total, returns) {
 }
 
 function createTransaction(transaction_type) {
-    var price = document.getElementById('price').value;
-    var shares = document.getElementById('shares').value;
+    var price = Number(document.getElementById('price').value);
+    var shares = Number(document.getElementById('shares').value);
+    var commission = Number(document.getElementById('commission').value);
 
     var transaction = {
         'price': price,
@@ -34,12 +35,13 @@ function buy() {
     var margin = Number(document.getElementById('margin').value);
     var stock = Number(document.getElementById('stock').value);
     var proceeds = Number(document.getElementById('proceeds').value);
+    var commission = Number(document.getElementById('commission').value);
 
     if(cash < proceeds) {
-        margin += proceeds - cash;
+        margin += commission + proceeds - cash;
         cash = 0;
     } else {
-        cash -= proceeds;
+        cash -= proceeds + commission;
     }
     stock += proceeds;
 
@@ -57,16 +59,17 @@ function sell() {
     var margin = Number(document.getElementById('margin').value);
     var stock = Number(document.getElementById('stock').value);
     var proceeds = Number(document.getElementById('proceeds').value);
+    var commission = Number(document.getElementById('commission').value);
 
     if(margin > 0) {
-        if(margin > proceeds) {
-            margin = margin - proceeds;
+        if(margin > (proceeds-commission)) {
+            margin = margin - (proceeds-commission);
         } else {
-            cash = proceeds - margin;
+            cash = (proceeds-commission) - margin;
             margin = 0;
         }
     } else {
-        cash += proceeds;
+        cash += (proceeds-commission);
     }
     stock -= proceeds;
 

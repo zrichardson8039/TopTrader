@@ -3,12 +3,12 @@ from .models import Game, Transaction
 
 
 class GameAdmin(admin.ModelAdmin):
-    list_display = ('trader', 'won', 'net_income')
-    search_fields = ['trader', 'won']
+    list_display = ('trader', 'cash', 'margin', 'stock', 'total_value', 'net_income')
+    search_fields = ['trader']
 
 
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ('transaction_type', 'shares', 'price', 'game')
+    list_display = ('transaction_type', 'shares', 'price', 'commission', 'game')
     list_filter = ['transaction_type']
 
 

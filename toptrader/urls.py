@@ -21,7 +21,8 @@ router.register('prices', stockmarket.PriceViewSet)
 # General URLs
 urlpatterns = [
     url(r'^$', 'apps.common.views.home', name='home'),
-    url(r'^play/$', 'apps.contests.views.NewGame', name='play'),
+    url(r'^play/$', 'apps.contests.views.new_game', name='new_game'),
+    url(r'^submitgame/$', 'apps.contests.views.submit_game', name='submit_game'),
     url(r'^profile/$', 'apps.contests.views.profile', name='profile'),
     url(r'^registration/$', 'apps.common.views.registration', name='registration'),
     url(r'^login/$', 'apps.common.views.login_request', name='login_request'),

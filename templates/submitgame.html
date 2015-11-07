@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <table class="submitgame">
+        <tr>
+            <td>
+                <label>Cash:</label>
+            </td>
+            <td>
+                <input class="submitgame-value" value="{{ cash }}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Margin:</label>
+            </td>
+            <td>
+                <input class="submitgame-value" value="{{ margin }}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Stock:</label>
+            </td>
+            <td>
+                <input class="submitgame-value" readonly="readonly" value="{{ stock }}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Total Value:</label>
+            </td>
+            <td>
+                <input class="submitgame-value" readonly="readonly" value="{{ total_value }}">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Net Income:</label>
+            </td>
+            <td>
+                <input class="submitgame-value" readonly="readonly" value="{{ net_income }}">
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="row">
+    <a href="/profile/"><button class="btn btn-lg btn-primary" id="submit-game-button" type="button">Submit Game</button></a>
+</div>
+{% endblock %}

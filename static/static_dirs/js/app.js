@@ -93,12 +93,12 @@ $(document).ready(function () {
         { label: "Stock", data: data, color: "#00FF00" }
     ];
 
-    $.plot("#flot-placeholder1", dataset, options);
+    $.plot("#placeholder1", dataset, options);
 
     function update() {
         GetPrice();
 
-        $.plot("#flot-placeholder1", dataset, options)
+        $.plot("#placeholder1", dataset, options)
         setTimeout(update, updateInterval);
     }
 

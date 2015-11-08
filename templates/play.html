@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block content %}
+<script src="{% static 'js/app.js' %}"></script>
 <div class="container gameplay" ng-view>
     <div class="row">
         <div class="col-md-6" id="competitor-portfolios">
@@ -41,9 +43,7 @@
             </table>
         </div>
 
-        <div class="row">
-            <img class="img-responsive" id="stock-chart" src="http://placehold.it/850x350" alt="stock chart">
-        </div>
+        <div id="flot-placeholder" style="width:850px;height:350px"></div>
         <div class="row">
             <table class="trade-order">
                 <tr>

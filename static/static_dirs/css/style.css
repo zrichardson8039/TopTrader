@@ -98,6 +98,10 @@
 	margin-left: -8%;
 }
 
+.legendLabel {
+    color: white;
+}
+
 #record {
 	margin-top: 12%;
 }

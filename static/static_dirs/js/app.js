@@ -1,5 +1,109 @@
 transactions = []
 
+var interestRate = 0.05;
+var timeIncrement = 1/52;
+var volatility = 0.15;
+
+
+var data = [];
+var totalTicks = 52;
+var updateInterval = 1000;
+var now = new Date().getTime();
+
+function weinerProcess() {
+    return Math.random() - 0.5;
+}
+
+function GetPrice() {
+    var i = 0;
+    while (data.length < totalTicks) {
+        var currentPrice = Number(document.getElementById('price').value);
+        var newPrice = interestRate * timeIncrement * currentPrice + currentPrice * volatility * weinerProcess();
+        var temp = [i, newPrice];
+        $('#price').val(newPrice);
+
+        data.push(temp);
+    }
+}
+
+var options = {
+    series: {
+        lines: {
+            show: true,
+            lineWidth: 1.2,
+            fill: true
+        }
+    },
+
+    xaxis: {
+        mode: "time",
+        tickSize: [2, "second"],
+        tickFormatter: function (v, axis) {
+            var date = new Date(v);
+
+            if (date.getSeconds() % 20 == 0) {
+                var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+                var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+                var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+
+                return hours + ":" + minutes + ":" + seconds;
+            } else {
+                return "";
+            }
+        },
+        axisLabel: "Week",
+        axisLabelUseCanvas: true,
+        axisLabelFontSizePixels: 12,
+        axisLabelFontFamily: 'Verdana, Arial',
+        axisLabelPadding: 10
+    },
+
+    yaxis: {
+        min: 0,
+        max: 100,
+        tickFormatter: function (v, axis) {
+            if (v % 10 == 0) {
+                return v + "%";
+            } else {
+                return "";
+            }
+        },
+        axisLabel: "Stock Price",
+        axisLabelUseCanvas: true,
+        axisLabelFontSizePixels: 12,
+        axisLabelFontFamily: 'Verdana, Arial',
+        axisLabelPadding: 6
+    },
+
+    legend: {
+        labelBoxBorderColor: "#fff"
+    },
+
+    grid: {
+        backgroundColor: "#000000",
+        tickColor: "#008040"
+    },
+};
+
+
+$(document).ready(function () {
+    GetPrice();
+
+    dataset = [
+        { label: "Stock", data: data, color: "#00FF00" }
+    ];
+
+    $.plot("#flot-placeholder1", dataset, options);
+
+    function update() {
+        GetPrice();
+
+        $.plot("#flot-placeholder1", dataset, options)
+        setTimeout(update, updateInterval);
+    }
+
+    update();
+});
 
 function updateValues(cash, stock, margin, total, returns) {
     cash = cash.toFixed(2);
@@ -67,6 +171,7 @@ function buy() {
 
 function sell() {
     transaction = createTransaction('S');
+    transactions.push(transaction);
     var cash = Number(document.getElementById('cash').value);
     var margin = Number(document.getElementById('margin').value);
     var stock = Number(document.getElementById('stock').value);

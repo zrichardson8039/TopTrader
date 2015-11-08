@@ -16,8 +16,6 @@
     {% block title %}
     {% endblock %}
 
-    <script src="{% static 'js/jQuery.js' %}"></script>
-    <script src="{% static 'js/app.js' %}"></script>
 
   </head>
   <body>
@@ -29,6 +27,7 @@
 
       {% block content %}
       {% endblock %}
+
 
     </div> <!-- /container -->
   {% include "js_base.html" %}

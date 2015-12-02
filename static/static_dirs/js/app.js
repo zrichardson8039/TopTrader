@@ -1,210 +1,65 @@
-transactions = []
+function updateValues(cash, margin, totalShares, shareValue, returns) {
 
-var interestRate = 0.05;
-var timeIncrement = 1/52;
-var volatility = 0.15;
-
-
-var data = [];
-var totalTicks = 52;
-var updateInterval = 1000;
-var now = new Date().getTime();
-
-function weinerProcess() {
-    return Math.random() - 0.5;
-}
-
-function GetPrice() {
-    var i = 0;
-    while (data.length < totalTicks) {
-        var currentPrice = Number(document.getElementById('price').value);
-        var newPrice = interestRate * timeIncrement * currentPrice + currentPrice * volatility * weinerProcess();
-        var temp = [i, newPrice];
-        $('#price').val(newPrice);
-
-        data.push(temp);
-    }
-}
-
-var options = {
-    series: {
-        lines: {
-            show: true,
-            lineWidth: 1.2,
-            fill: true
-        }
-    },
-
-    xaxis: {
-        mode: "time",
-        tickSize: [2, "second"],
-        tickFormatter: function (v, axis) {
-            var date = new Date(v);
-
-            if (date.getSeconds() % 20 == 0) {
-                var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
-                var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-                var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
-
-                return hours + ":" + minutes + ":" + seconds;
-            } else {
-                return "";
-            }
-        },
-        axisLabel: "Week",
-        axisLabelUseCanvas: true,
-        axisLabelFontSizePixels: 12,
-        axisLabelFontFamily: 'Verdana, Arial',
-        axisLabelPadding: 10
-    },
-
-    yaxis: {
-        min: 0,
-        max: 100,
-        tickFormatter: function (v, axis) {
-            if (v % 10 == 0) {
-                return v + "%";
-            } else {
-                return "";
-            }
-        },
-        axisLabel: "Stock Price",
-        axisLabelUseCanvas: true,
-        axisLabelFontSizePixels: 12,
-        axisLabelFontFamily: 'Verdana, Arial',
-        axisLabelPadding: 6
-    },
-
-    legend: {
-        labelBoxBorderColor: "#fff"
-    },
-
-    grid: {
-        backgroundColor: "#000000",
-        tickColor: "#008040"
-    },
-};
-
-
-$(document).ready(function () {
-    GetPrice();
-
-    dataset = [
-        { label: "Stock", data: data, color: "#00FF00" }
-    ];
-
-    $.plot("#placeholder1", dataset, options);
-
-    function update() {
-        GetPrice();
-
-        $.plot("#placeholder1", dataset, options)
-        setTimeout(update, updateInterval);
-    }
-
-    update();
-});
-
-function updateValues(cash, stock, margin, total, returns) {
     cash = cash.toFixed(2);
-    stock = stock.toFixed(2);
     margin = margin.toFixed(2);
-    total = total.toFixed(2);
+    totalShares = totalShares.toFixed(0);
+    shareValue = shareValue.toFixed(2);
     returns = returns.toFixed(2);
 
     $('#cash').val(cash);
-    $('#stock').val(stock);
     $('#margin').val(margin);
-    $('#total').val(total);
+    $('#total-shares').val(totalShares);
+    $('#stock-value').val(shareValue);
     $('#returns').val(returns);
 }
 
-function createTransaction(transaction_type) {
-    var game = "{{ game_id }}"
-    var price = Number(document.getElementById('price').value);
-    var shares = Number(document.getElementById('shares').value);
-    var commission = Number(document.getElementById('commission').value);
-
-    var transaction = {
-        'game': game,
-        'price': price,
-        'shares': shares,
-        'commission': commission,
-        'transaction_type': transaction_type,
-    };
-    return transaction;
-}
-
 function buy() {
-    transaction = createTransaction('B');
-    transactions.push(transaction);
     var cash = Number(document.getElementById('cash').value);
     var margin = Number(document.getElementById('margin').value);
-    var stock = Number(document.getElementById('stock').value);
+    var totalShares = Number(document.getElementById('total-shares').value);
+    var shares = Number(document.getElementById('shares').value);
+    var price = Number(document.getElementById('price').value);
     var proceeds = Number(document.getElementById('proceeds').value);
-    var commission = Number(document.getElementById('commission').value);
 
     if(cash < proceeds) {
-        margin += commission + proceeds - cash;
+        margin += proceeds - cash;
         cash = 0;
-    } else {
-        cash -= proceeds + commission;
     }
-    stock += proceeds;
+    else {
+        cash = cash - proceeds;
+    }
 
-    var total = cash + stock - margin;
-    var returns = total - 100000.00;
+    totalShares = totalShares + shares;
+    var shareValue = totalShares * price;
+    var returns = cash - margin + shareValue - 100000;
 
-    updateValues(cash, stock, margin, total, returns);
-    console.log(transactions);
 
-    $.ajax({
-            url: 'http://localhost:8000/api/transactions/',
-            type: 'post',
-            data: transactions,
-            dataType: 'JSON',
-            success: function(data) {
-                updateValues(cash, stock, margin, total, returns)
-            }
-    });
+
+    updateValues(cash, margin, totalShares, shareValue, returns);
+
 }
 
 function sell() {
-    transaction = createTransaction('S');
-    transactions.push(transaction);
     var cash = Number(document.getElementById('cash').value);
     var margin = Number(document.getElementById('margin').value);
-    var stock = Number(document.getElementById('stock').value);
+    var totalShares = Number(document.getElementById('total-shares').value);
+    var shares = Number(document.getElementById('shares').value);
+    var price = Number(document.getElementById('price').value);
     var proceeds = Number(document.getElementById('proceeds').value);
-    var commission = Number(document.getElementById('commission').value);
 
-    if(margin > 0) {
-        if(margin > (proceeds-commission)) {
-            margin = margin - (proceeds-commission);
-        } else {
-            cash = (proceeds-commission) - margin;
-            margin = 0;
-        }
-    } else {
-        cash += (proceeds-commission);
+    if(margin < proceeds) {
+        cash = proceeds - margin;
+        margin = 0;
     }
-    stock -= proceeds;
+    else {
+        cash += proceeds;
+    }
 
-    var total = cash + stock - margin;
-    var returns = total - 100000.00;
+    totalShares -= shares;
+    var shareValue = totalShares * price;
+    var returns = cash - margin + shareValue - 100000;
 
-    updateValues(cash, stock, margin, total, returns)
-    console.log(transactions);
-
-    $.ajax({
-            url: 'http://localhost:8000/api/transactions/',
-            type: 'post',
-            data: transactions,
-            dataType: 'JSON',
-            success: function(data) {
-                updateValues(cash, stock, margin, total, returns)
-            }
-    });
+    updateValues(cash, margin, totalShares, shareValue, returns);
 }
 
 function calcProceeds() {
@@ -217,40 +72,82 @@ function calcProceeds() {
     $('#proceeds').val(proceeds);
 }
 
-$(document).ready(function() {
-    $('#submit-game-button').click(function() {
-        var game = "{{ game_id }}"
-        var cash = Number(document.getElementById('cash').value);
-        var margin = Number(document.getElementById('margin').value);
-        var stock = Number(document.getElementById('stock').value);
-        var total_value = Number(document.getElementById('total').value);
-        var net_income = Number(document.getElementById('returns').value);
+function calcReturns() {
+    var cash = Number(document.getElementById('cash').value);
+    var margin = Number(document.getElementById('margin').value);
+    var totalShares = Number(document.getElementById('total-shares').value);
+    var price = Number(document.getElementById('price').value);
+    var shareValue = totalShares * price;
+    var returns = cash - margin + shareValue - 100000;
 
-        var gameData = {
-            'id': game,
-            'cash': cash,
-            'margin': margin,
-            'stock': stock,
-            'total_value': total_value,
-            'net_income': net_income,
+    shareValue = shareValue.toFixed(2);
+    returns = returns.toFixed(2);
+    $('#stock-value').val(shareValue);
+    $('#returns').val(returns);
+}
+
+$(document).ready(function() {
+    var data = [],
+	    totalPoints = 150;
+
+    function getRandomData() {
+
+        if (data.length > 0)
+            data = data.slice(1);
+
+        // Do a random walk
+
+        while (data.length < totalPoints) {
+            // Calculate stochastic stock price
+            var prev = data.length > 0 ? data[data.length - 1] : 50,
+                y = prev + (prev * 0.05 * 0.02) + (prev * 0.10 * (Math.random() - 0.5));
+            if (y < 0) {
+                y = 0;
+            } else if (y > 100) {
+                y = 100;
+            }
+            $('#price').val(y);
+            calcReturns();
+            calcProceeds();
+            data.push(y);
         }
 
-        $.ajax({
-            url: 'http://localhost:8000/api/games/',
-            type: 'put',
-            data: gameData,
-            dataType: 'JSON',
-            success: function(data) {
-                var jsonData = $.parseJSON(data);
-                $('#cash').val(jsonData.cash);
-                $('#margin').val(jsonData.margin);
-                $('#stock').val(jsonData.stock);
-                $('#total').val(jsonData.total_value);
-                $('#returns').val(jsonData.net_income);
-            }
-        });
+        // Zip the generated y values with the x values
+
+        var res = [];
+        for (var i = 0; i < data.length; ++i) {
+            res.push([i, data[i]])
+        }
+
+        return res;
+    }
+
+    // Set up the control widget
+
+    var updateInterval = 30;
+
+    var plot = $.plot("#placeholder", [ getRandomData() ], {
+        series: {
+            shadowSize: 0	// Drawing is faster without shadows
+        },
+        yaxis: {
+            min: 0,
+            max: 100
+        },
+        xaxis: {
+            show: false
+        }
     });
+
+    function update() {
+
+        plot.setData([getRandomData()]);
+
+        // Since the axes don't change, we don't need to call plot.setupGrid()
+
+        plot.draw();
+        setTimeout(update, updateInterval);
+    }
+
+    update();
 });
-
-
-

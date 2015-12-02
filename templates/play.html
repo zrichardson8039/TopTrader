@@ -22,27 +22,27 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="portfolio-label">Stock:</td>
+                    <td class="portfolio-label">Total Shares:</td>
                     <td>
-                        <span>$<input type="number" class="portfolio-value" id="stock" readonly="readonly" min=0 value=0.00></span>
+                        <span>$<input type="number" class="portfolio-value" id="total-shares" readonly="readonly" min=0 value=0></span>
                     </td>
                 </tr>
                 <tr>
-                    <td class="portfolio-label">Total Value:</td>
+                    <td class="portfolio-label">Stock Value:</td>
                     <td>
-                        <span>$<input type="number" class="portfolio-value" id="total" readonly="readonly" value=100000.00></span>
+                        <span>$<input type="number" class="portfolio-value" id="stock-value" readonly="readonly" value=0.00></span>
                     </td>
                 </tr>
                 <tr>
                     <td class="portfolio-label">Total Return:</td>
                     <td>
-                        <span>$<input type="number" class="portfolio-value" id="returns" readonly="readonly" value=0></span>
+                        <span>$<input type="number" class="portfolio-value" id="returns" readonly="readonly" value=0.00></span>
                     </td>
                 </tr>
             </table>
         </div>
 
-        <div id="placeholder" style="width:850px;height:350px"></div>
+        <div class="row" id="placeholder" style="width:850px;height:350px"></div>
         <div class="row">
             <table class="trade-order">
                 <tr>
@@ -54,40 +54,22 @@
                 <tr>
                     <td class="portfolio-label">Price:</td>
                     <td>
-                        <span>$<input type="number" class="portfolio-value" id="price" readonly="readonly" value=25.00></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="portfolio-label">Commission:</td>
-                    <td>
-                        <span>$<input type="number" class="portfolio-value" id="commission" readonly="readonly" value=15.00></span>
+                        <span>$<input type="number" class="portfolio-value" id="price" readonly="readonly"value=50.00 onchange="calcProceeds()"></span>
                     </td>
                 </tr>
                 <tr>
                     <td class="portfolio-label">Proceeds:</td>
                     <td>
-                        <span>$<input type="number" class="portfolio-value" id="proceeds" readonly="readonly" value=25000.00></span>
+                        <span>$<input type="number" class="portfolio-value" id="proceeds" readonly="readonly" value=25000.00 onchange="calcProceeds()"></span>
                     </td>
                 </tr>
             </table>
         </div>
         <div class="col-md-6">
-            <form method="POST" action="">
-                {% csrf_token %}
-                <button type="button" class="trade-button" id="buy-button" onclick="buy()">BUY</button>
-            </form>
+            <button type="button" class="trade-button" id="buy-button" onclick="buy()">BUY</button>
         </div>
         <div class="col-md-6">
-            <form method="POST" action="">
-                {% csrf_token %}
-                <button type="button" class="trade-button" id="sell-button" onclick="sell()">SELL</button>
-            </form>
-        </div>
-        <div class="row">
-            <form method="PUT" action="">
-                {% csrf_token %}
-                <button class="btn btn-lg btn-primary" id="submit-game-button" type="button">Submit Game</button>
-            </form>
+            <button type="button" class="trade-button" id="sell-button" onclick="sell()">SELL</button>
         </div>
     </div>
 </div>

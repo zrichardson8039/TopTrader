@@ -20,6 +20,7 @@
   </head>
   <body>
 
+
   {% block homepage %}
   {% endblock %}
 
@@ -28,8 +29,7 @@
       {% block content %}
       {% endblock %}
 
-
+    {% include "js_base.html" %}
     </div> <!-- /container -->
-  {% include "js_base.html" %}
   </body>
 </html>

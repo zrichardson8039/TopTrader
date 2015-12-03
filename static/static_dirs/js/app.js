@@ -49,7 +49,7 @@ function sell() {
 
     if(margin > 0) {
         if(margin > proceeds) {
-            margin = mergin - proceeds;
+            margin = margin - proceeds;
         }
         else {
             cash = proceeds - margin;
@@ -98,67 +98,64 @@ $(document).ready(function() {
     document.getElementById("id_stock_value").readOnly = true;
     document.getElementById("id_net_income").readOnly = true;
 
-    var data = [],
-	    totalPoints = 150;
+    var i = 0;
+    var res = [];
+    var data = [];
+	var totalTicks = 60;
 
-    function getRandomData() {
-
-        if (data.length > 0)
-            data = data.slice(1);
-
-        // Do a random walk
-
-        while (data.length < totalPoints) {
-            // Calculate stochastic stock price
-            var prev = data.length > 0 ? data[data.length - 1] : 50,
-                y = prev + (prev * 0.05 * 0.02) + (prev * 0.10 * (Math.random() - 0.5));
-            if (y < 0) {
-                y = 0;
-            } else if (y > 100) {
-                y = 100;
-            }
-            $('#price').val(y);
-            calcReturns();
-            calcProceeds();
-            data.push(y);
+    function generateNextPrice() {
+        var prev = data.length > 0 ? data[data.length - 1] : 50,
+            y = prev + (prev * 0.10 * (Math.random() - 0.5));
+        if (y < 20) {
+            y = 20;
+        } else if (y > 80) {
+            y = 80;
         }
-
-        // Zip the generated y values with the x values
-
-        var res = [];
-        for (var i = 0; i < data.length; ++i) {
-            res.push([i, data[i]])
-        }
-
-        return res;
+        $('#price').val(y.toFixed(2));
+        calcReturns();
+        calcProceeds();
+        data.push(y);
+        res.push([i, data[i]])
+        i++;
     }
-
-    // Set up the control widget
-
-    var updateInterval = 1000;
-
-    var plot = $.plot("#placeholder", [ getRandomData() ], {
+    generateNextPrice();
+    $.plot("#placeholder", [ res ], {
         series: {
-            shadowSize: 0	// Drawing is faster without shadows
+            lines: {
+                fill: true
+            }
         },
         yaxis: {
-            min: 0,
-            max: 100
+            min: 20,
+            max: 80
         },
         xaxis: {
-            show: false
+            show: true
         }
     });
-
+    var updateInterval = 1000;
     function update() {
-
-        plot.setData([getRandomData()]);
-
-        // Since the axes don't change, we don't need to call plot.setupGrid()
-
-        plot.draw();
-        setTimeout(update, updateInterval);
+        generateNextPrice();
+        console.log(data.length);
+        $.plot("#placeholder", [ res ], {
+            series: {
+                lines: {
+                    fill: true
+            }
+            },
+            yaxis: {
+                min: 20,
+                max: 80
+            },
+            xaxis: {
+                show: true,
+                min: 0,
+                max: 59
+            }
+        });
+        if(data.length < totalTicks) {
+            setTimeout(update, updateInterval);
+        }
     }
-
     update();
 });

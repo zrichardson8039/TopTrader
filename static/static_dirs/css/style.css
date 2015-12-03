@@ -69,6 +69,10 @@
 	margin-left: 12%
 }
 
+#flot-placeholder {
+    margin-top: 7%;
+}
+
 .trade-order {
 	margin-left: 35%;
 	margin-top: 1%;
@@ -136,7 +140,6 @@
 }
 
 .portfolio-data {
-	background-color: grey;
 	color: black;
 }
 

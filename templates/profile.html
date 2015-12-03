@@ -16,13 +16,14 @@
                 <td width="10%">Stock Value</td>
             </tr>
             <tr class="portfolio-data">
-                <td width="30%">{{ net_income }}</td>
-                <td width="10%">{{ cash }}</td>
-                <td width="10%">{{ margin }}</td>
-                <td width="10%">{{ shares }}</td>
-                <td width="10%">{{ stock_value }}</td>
+                <td width="30%" id="profile-net-income">{{ net_income }}</td>
+                <td width="10%" id="profile-cash">{{ cash }}</td>
+                <td width="10%" id="profile-margin">{{ margin }}</td>
+                <td width="10%" id="profile-shares">{{ shares }}</td>
+                <td width="10%" id="profile-stock-value">{{ stock_value }}</td>
             </tr>
         </table>
     </div>
+    <div id="flot-placeholder" style="width:100%;height:500px"></div>
 </div>
 {% endblock %}

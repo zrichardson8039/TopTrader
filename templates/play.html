@@ -3,74 +3,72 @@
 
 {% block content %}
 <div class="container gameplay" ng-view>
-    <div class="row">
-        <div class="col-md-6" id="competitor-portfolios">
-            <!-- TODO: This will be replaced by the users profile picture -->
-            <a href="{% url 'profile' %}"><img class="img-responsive profile-picture" src="http://placehold.it/100x100" alt="profile picture"></a>
-            <!-- TODO: This should dynamically update as user places trades -->
+    <form method="POST" action="{% url 'play' %}">
+        {% csrf_token %}
+        <div class="col-md-6" id="portfolio">
             <table class="portfolio">
                 <tr>
-                    <td class="portfolio-label">Cash:</td>
+                    <td class="portfolio-label"><label for="cash">Cash:</td>
                     <td>
-                        <span>$<input type="number" class="portfolio-value" id="cash" readonly="readonly" value=100000.00></span>
+                        {{form.cash}}
                     </td>
                 </tr>
                 <tr>
                     <td class="portfolio-label">Margin:</td>
                     <td>
-                        <span>$<input type="number" class="portfolio-value" id="margin" readonly="readonly" value=0.00></span>
+                        {{form.margin}}
                     </td>
                 </tr>
                 <tr>
                     <td class="portfolio-label">Total Shares:</td>
                     <td>
-                        <span>$<input type="number" class="portfolio-value" id="total-shares" readonly="readonly" min=0 value=0></span>
+                        {{form.shares}}
                     </td>
                 </tr>
                 <tr>
                     <td class="portfolio-label">Stock Value:</td>
                     <td>
-                        <span>$<input type="number" class="portfolio-value" id="stock-value" readonly="readonly" value=0.00></span>
+                       {{form.stock_value}}
                     </td>
                 </tr>
                 <tr>
-                    <td class="portfolio-label">Total Return:</td>
+                    <td class="portfolio-label">Net Income:</td>
                     <td>
-                        <span>$<input type="number" class="portfolio-value" id="returns" readonly="readonly" value=0.00></span>
+                        {{form.net_income}}
                     </td>
                 </tr>
             </table>
         </div>
-
-        <div class="row" id="placeholder" style="width:850px;height:350px"></div>
-        <div class="row">
-            <table class="trade-order">
-                <tr>
-                    <td class="portfolio-label">Shares:</td>
-                    <td>
-                        <input type="number" id="shares" value=1000 onchange="calcProceeds()">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="portfolio-label">Price:</td>
-                    <td>
-                        <span>$<input type="number" class="portfolio-value" id="price" readonly="readonly"value=50.00 onchange="calcProceeds()"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="portfolio-label">Proceeds:</td>
-                    <td>
-                        <span>$<input type="number" class="portfolio-value" id="proceeds" readonly="readonly" value=25000.00 onchange="calcProceeds()"></span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="col-md-6">
-            <button type="button" class="trade-button" id="buy-button" onclick="buy()">BUY</button>
-        </div>
-        <div class="col-md-6">
-            <button type="button" class="trade-button" id="sell-button" onclick="sell()">SELL</button>
-        </div>
+        <input type="submit" class="profile-button pull-right" id="profile-button" value="Profile">
+    </form>
+    <div class="row" id="placeholder" style="width:850px;height:350px"></div>
+    <div class="row">
+        <table class="trade-order">
+            <tr>
+                <td class="portfolio-label">Shares:</td>
+                <td>
+                    <input type="number" id="shares" value=1000 onchange="calcProceeds()">
+                </td>
+            </tr>
+            <tr>
+                <td class="portfolio-label">Price:</td>
+                <td>
+                    <span>$<input type="number" class="portfolio-value" id="price" readonly="readonly"value=50.00 onchange="calcProceeds()"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="portfolio-label">Proceeds:</td>
+                <td>
+                    <span>$<input type="number" class="portfolio-value" id="proceeds" readonly="readonly" value=25000.00 onchange="calcProceeds()"></span>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <button type="button" class="trade-button" id="buy-button" onclick="buy()">BUY</button>
+    </div>
+    <div class="col-md-6">
+        <button type="button" class="trade-button" id="sell-button" onclick="sell()">SELL</button>
     </div>
 </div>
 {% endblock %}

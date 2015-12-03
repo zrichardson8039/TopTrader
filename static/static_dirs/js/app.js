@@ -6,17 +6,17 @@ function updateValues(cash, margin, totalShares, shareValue, returns) {
     shareValue = shareValue.toFixed(2);
     returns = returns.toFixed(2);
 
-    $('#cash').val(cash);
-    $('#margin').val(margin);
-    $('#total-shares').val(totalShares);
-    $('#stock-value').val(shareValue);
-    $('#returns').val(returns);
+    $('#id_cash').val(cash);
+    $('#id_margin').val(margin);
+    $('#id_shares').val(totalShares);
+    $('#id_stock_value').val(shareValue);
+    $('#id_net_income').val(returns);
 }
 
 function buy() {
-    var cash = Number(document.getElementById('cash').value);
-    var margin = Number(document.getElementById('margin').value);
-    var totalShares = Number(document.getElementById('total-shares').value);
+    var cash = Number(document.getElementById('id_cash').value);
+    var margin = Number(document.getElementById('id_margin').value);
+    var totalShares = Number(document.getElementById('id_shares').value);
     var shares = Number(document.getElementById('shares').value);
     var price = Number(document.getElementById('price').value);
     var proceeds = Number(document.getElementById('proceeds').value);
@@ -40,16 +40,21 @@ function buy() {
 }
 
 function sell() {
-    var cash = Number(document.getElementById('cash').value);
-    var margin = Number(document.getElementById('margin').value);
-    var totalShares = Number(document.getElementById('total-shares').value);
+    var cash = Number(document.getElementById('id_cash').value);
+    var margin = Number(document.getElementById('id_margin').value);
+    var totalShares = Number(document.getElementById('id_shares').value);
     var shares = Number(document.getElementById('shares').value);
     var price = Number(document.getElementById('price').value);
     var proceeds = Number(document.getElementById('proceeds').value);
 
-    if(margin < proceeds) {
-        cash = proceeds - margin;
-        margin = 0;
+    if(margin > 0) {
+        if(margin > proceeds) {
+            margin = mergin - proceeds;
+        }
+        else {
+            cash = proceeds - margin;
+            margin = 0;
+        }
     }
     else {
         cash += proceeds;
@@ -73,20 +78,26 @@ function calcProceeds() {
 }
 
 function calcReturns() {
-    var cash = Number(document.getElementById('cash').value);
-    var margin = Number(document.getElementById('margin').value);
-    var totalShares = Number(document.getElementById('total-shares').value);
+    var cash = Number(document.getElementById('id_cash').value);
+    var margin = Number(document.getElementById('id_margin').value);
+    var totalShares = Number(document.getElementById('id_shares').value);
     var price = Number(document.getElementById('price').value);
     var shareValue = totalShares * price;
     var returns = cash - margin + shareValue - 100000;
 
     shareValue = shareValue.toFixed(2);
     returns = returns.toFixed(2);
-    $('#stock-value').val(shareValue);
-    $('#returns').val(returns);
+    $('#id_stock_value').val(shareValue);
+    $('#id_net_income').val(returns);
 }
 
 $(document).ready(function() {
+    document.getElementById("id_cash").readOnly = true;
+    document.getElementById("id_margin").readOnly = true;
+    document.getElementById("id_shares").readOnly = true;
+    document.getElementById("id_stock_value").readOnly = true;
+    document.getElementById("id_net_income").readOnly = true;
+
     var data = [],
 	    totalPoints = 150;
 
@@ -124,7 +135,7 @@ $(document).ready(function() {
 
     // Set up the control widget
 
-    var updateInterval = 30;
+    var updateInterval = 1000;
 
     var plot = $.plot("#placeholder", [ getRandomData() ], {
         series: {

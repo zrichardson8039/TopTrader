@@ -3,16 +3,8 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-sm-6">
-            <img class="profile-picture" id="profile-page-picture" src="http://placehold.it/100x80" alt="profile picture">
-            <p id="record">Record: 2-1</p>
-        </div>
-        <div class="col-sm-3 col-xs-4">
-                <a href="/play/"><button class="profile-button" id="new-game" type="button">New Game</button></a>
-        </div>
-        <div class="col-sm-3 col-xs-4">
-            <a href="/logout/`"><button class="profile-button" id="sign-out" type="button">Sign Out</button></a>
-        </div>
+        <a class="pull-right" id="sign-out" href="/logout/">Sign Out</a>
+        <a href="/play/"><button class="profile-button pull-right" id="play-game" type="button">Day Trade</button></a>
     </div>
     <div class="col-xs-12">
         <table id="game-history" width="100%">
@@ -20,40 +12,17 @@
                 <td width="30%">Net Income/Loss</td>
                 <td width="10%">Cash</td>
                 <td width="10%">Margin</td>
-                <td width="10%">Stock</td>
-                <td width="10%">Total Return</td>
+                <td width="10%">Shares</td>
+                <td width="10%">Stock Value</td>
             </tr>
-            {% for game in all_games reversed %}
-                {% if forloop.counter|divisibleby:2 %}
-                    <tr class="opponent-row-even">
-                        <td width="30%">{{ game.net_income }}</td>
-                        <td width="10%">{{ game.cash }}</td>
-                        <td width="10%">{{ game.margin }}</td>
-                        <td width="10%">{{ game.stock }}</td>
-                        <td width="10%">{{ game.total_value }}</td>
-                    </tr>
-                {% else %}
-                    <tr class="opponent-row">
-                        <td width="30%">{{ game.net_income }}</td>
-                        <td width="10%">{{ game.cash }}</td>
-                        <td width="10%">{{ game.margin }}</td>
-                        <td width="10%">{{ game.stock }}</td>
-                        <td width="10%">{{ game.total_value }}</td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
+            <tr class="portfolio-data">
+                <td width="30%">{{ net_income }}</td>
+                <td width="10%">{{ cash }}</td>
+                <td width="10%">{{ margin }}</td>
+                <td width="10%">{{ shares }}</td>
+                <td width="10%">{{ stock_value }}</td>
+            </tr>
         </table>
-        <div class="row">
-            <div class="col-md-6">
-                <img class="analytics-graph" id="trade-frequency-gaph" src="http://placehold.it/470x300" alt="Trade Type">
-            </div>
-            <div class="col-md-6">
-                <div class="pull-right">
-                    <img class="analytics-graph" id="cumulative-returns" src="http://placehold.it/470x300" alt="Trade Type">
-                </div>
-            </div>
-        </div>
     </div>
 </div>
-
 {% endblock %}

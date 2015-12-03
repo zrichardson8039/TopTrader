@@ -1,68 +1,52 @@
+from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.shortcuts import render
 from rest_framework import viewsets
-from apps.contests.serializers import GameSerializer, TransactionSerializer
+from apps.contests.serializers import PortfolioSerializer
 from apps.common.permissions import ReadOnly
-from .models import Game, Transaction
-from .forms import GameForm, TransactionForm
+from .models import Portfolio
+from .forms import PortfolioForm
 
 
-def new_game(request):
-    game = Game.objects.create(trader=auth.get_user(request))
-    game.save()
+def play(request):
+    portfolio = Portfolio.objects.get(trader=auth.get_user(request))
 
-    context = {
-        "game_id": game.id
-    }
-    return render(request, "play.html", context)
+    form = PortfolioForm(request.POST or None)
+    if form.is_valid():
+        portfolio.cash = form.cleaned_data['cash']
+        portfolio.margin = form.cleaned_data['margin']
+        portfolio.shares = form.cleaned_data['shares']
+        portfolio.stock_value = form.cleaned_data['stock_value']
+        portfolio.net_income = form.cleaned_data['net_income']
+        portfolio.save()
+        return HttpResponseRedirect('/profile/')
+    else:
+        form.fields['cash'].initial = portfolio.cash
+        form.fields['margin'].initial = portfolio.margin
+        form.fields['shares'].initial = portfolio.shares
+        form.fields['stock_value'].initial = portfolio.stock_value
+        form.fields['net_income'].initial = portfolio.net_income
+
+        context = {"form": form }
+        return render(request, "play.html", context)
 
 
 def profile(request):
-    games = Game.objects.filter(trader=auth.get_user(request))
-    all_games = []
-    for g in games:
-        buys = Transaction.objects.filter(game=g, transaction_type='B')
-        sells = Transaction.objects.filter(game=g, transaction_type='S')
-        buys_count = buys.count()
-        sells_count = sells.count()
-
-        sells_proceeds = 0
-        for s in sells:
-            sells_proceeds = sells_proceeds + (s.price * s.shares)
-
-        buys_proceeds = 0
-        for b in buys:
-            buys_proceeds = buys_proceeds + (b.price * b.shares)
-
-        commissions = (buys_count + sells_count) * 15
-
-        game_details = {
-            "cash": g.cash,
-            "margin": g.margin,
-            "stock": g.stock,
-            "total_value": g.total_value,
-            "net_income": g.net_income,
-            "buys": buys_count,
-            "buys_proceeds": buys_proceeds,
-            "sells": sells_count,
-            "sells_proceeds": sells_proceeds,
-            "commissions": commissions
-        }
-        all_games.append(game_details)
+    portfolio = Portfolio.objects.get_or_create(trader=auth.get_user(request))
+    portfolio = portfolio[0]
     context = {
-        "all_games": all_games
+        "portfolio": portfolio,
+        "net_income": portfolio.net_income,
+        "cash": portfolio.cash,
+        "margin": portfolio.margin,
+        "shares": portfolio.shares,
+        "stock_value": portfolio.stock_value
     }
 
     return render(request, "profile.html", context)
 
 
-class GameViewSet(viewsets.ModelViewSet):
-    queryset = Game.objects.all()
-    serializer_class = GameSerializer
-    permission_classes = [ReadOnly, ]
-
-
-class TransactionViewSet(viewsets.ModelViewSet):
-    queryset = Transaction.objects.all()
-    serializer_class = TransactionSerializer
+class PortfolioViewSet(viewsets.ModelViewSet):
+    queryset = Portfolio.objects.all()
+    serializer_class = PortfolioSerializer
     permission_classes = [ReadOnly, ]

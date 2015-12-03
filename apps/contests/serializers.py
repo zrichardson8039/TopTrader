@@ -1,12 +1,7 @@
 from rest_framework import serializers
-from apps.contests.models import Game, Transaction
+from apps.contests.models import Portfolio
 
 
-class GameSerializer(serializers.ModelSerializer):
+class PortfolioSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Game
-
-
-class TransactionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Transaction
+        model = Portfolio

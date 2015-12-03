@@ -3,8 +3,7 @@ from django.shortcuts import render
 from .forms import RegistrationForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-
-
+from apps.contests.models import Portfolio
 
 def home(request):
     title = "Welcome | TopTrader"

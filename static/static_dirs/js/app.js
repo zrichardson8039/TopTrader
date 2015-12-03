@@ -1,3 +1,11 @@
+function resetPortfolio() {
+    $('#id_cash').val(100000);
+    $('#id_margin').val(0);
+    $('#id_shares').val(0);
+    $('#id_stock_value').val(0);
+    $('#id_net_income').val(0);
+}
+
 function updateValues(cash, margin, totalShares, shareValue, returns) {
 
     cash = cash.toFixed(2);
@@ -106,8 +114,8 @@ $(document).ready(function() {
     function generateNextPrice() {
         var prev = data.length > 0 ? data[data.length - 1] : 50,
             y = prev + (prev * 0.10 * (Math.random() - 0.5));
-        if (y < 20) {
-            y = 20;
+        if (y < 1) {
+            y = 1;
         } else if (y > 80) {
             y = 80;
         }
@@ -126,7 +134,7 @@ $(document).ready(function() {
             }
         },
         yaxis: {
-            min: 20,
+            min: 0,
             max: 80
         },
         xaxis: {
@@ -144,7 +152,7 @@ $(document).ready(function() {
             }
             },
             yaxis: {
-                min: 20,
+                min: 0,
                 max: 80
             },
             xaxis: {

@@ -65,7 +65,7 @@
 }
 
 #placeholder {
-	margin-top: 12%;
+	margin-top: 1%;
 	margin-left: 12%
 }
 
@@ -126,6 +126,20 @@
 	margin-top: 0.5%;
 	margin-bottom: 0.5%;
 	background-color: #60abe3;
+}
+
+#reset-button {
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+	color: black;
+	font-weight: bold;
+	float: left;
+	padding: 0.5% 1%;
+	margin-top: 0.5%;
+	margin-bottom: 0.5%;
+	margin-right: 0.5%;
+	background-color: #aaa;
 }
 
 #sign-out {
